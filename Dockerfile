@@ -5,7 +5,18 @@ ENV PYTHONUNBUFFERED 1
 
 # copy and install requirements
 COPY ./requirements.txt /requirements.txt
+# use system package manager to install posgres client. nocache minimizes footprint
+RUN apk add --update --no-cache postgresql-client
+
+# create named dependency bundle which we will delete after install, minimizing dependencies
+RUN apk add --update --no-cache --virtual .temp-dependencies \
+	gcc libc-dev linux-headers postgresql-dev musl-dev zlib zlib-dev
+	
+# install requirements
 RUN pip install -r /requirements.txt
+
+# uninstall temp-dependencies
+RUN apk del .temp-dependencies
 
 # create /app folder on container
 RUN mkdir /app

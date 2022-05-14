@@ -27,7 +27,7 @@ class ModelTests(TestCase):
         )
 
         self.assertTrue(user.is_superuser)
-        self.assertTrue(user.is_admin)
+        self.assertTrue(user.is_staff)
 
     def test_email_normalization(self):
         """Test that the domain segment of the email is normalized when new user is created"""

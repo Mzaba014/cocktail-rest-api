@@ -14,7 +14,6 @@ class UserManager(BaseUserManager):
         return username + domain
 
     def create_user(self, email: str, password: str):
-        """Returns an instance of the custom User model using the given params"""
         if email is None:
             raise ValueError("Email cannot be None")
         elif password is None:
@@ -30,8 +29,8 @@ class UserManager(BaseUserManager):
         """Leverage create_user to create a User, then modify the permission booleans and return the modified User"""
         user = self.create_user(email, password)
         print(type(user))
-        user.is_superuser = True # Boolean provided by PermissionsMixin
-        user.is_admin = True
+        user.is_superuser = True  # Boolean provided by PermissionsMixin, assigns full permissions to user
+        user.is_staff = True
         user.save()
 
         return user
@@ -43,6 +42,12 @@ class User(AbstractBaseUser, PermissionsMixin):
        ABU provides core implementation of User model such as hashed passwords
        PermissionsMixin provides db fields and methods for Django's permission model"""
     email = models.EmailField(max_length=254, unique=True)
-    objects = UserManager()
     USERNAME_FIELD = 'email'  # the name of the field in the user model that is used as the unique identifier
-    is_admin = models.BooleanField(default=False)
+
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False) # allows access to admin panel
+
+    objects = UserManager()
+
+
+
