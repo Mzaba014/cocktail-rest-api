@@ -1,4 +1,4 @@
-version: "3"
+version: "3.9"
 
 services:
     cocktail:
@@ -9,12 +9,14 @@ services:
         volumes:
          - "./app:/app"
         command: >
-         sh -c "python manage.py runserver 0.0.0.0:8000"
+         sh -c "python manage.py wait_for_db_ready &&
+                python manage.py migrate &&
+                python manage.py runserver 0.0.0.0:8000"
         environment:
          - DB_HOST=database
          - DB_NAME=app
          - DB_USER=postgres
-         - DB_PASS=thisismylocaldbpassword
+         - DB_PASS=samplepassword
         depends_on:
         - database
     database:
@@ -22,4 +24,4 @@ services:
         environment:
          - POSTGRES_DB=app
          - POSTGRES_USER=postgres
-         - POSTGRES_PASSWORD=thisismylocaldbpassword
+         - POSTGRES_PASSWORD=samplepassword
