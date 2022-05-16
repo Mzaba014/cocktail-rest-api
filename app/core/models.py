@@ -45,9 +45,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'  # the name of the field in the user model that is used as the unique identifier
 
     is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False) # allows access to admin panel
+    is_staff = models.BooleanField(default=False)  # allows access to admin panel
 
     objects = UserManager()
-
-
-
