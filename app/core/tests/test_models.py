@@ -1,5 +1,11 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
+from core import models
+
+
+def create_user(email='test@manny.dev', password='modelstestpass'):
+    """Helper function for creating Users"""
+    return get_user_model().objects.create_user(email, password)
 
 
 class ModelTests(TestCase):
@@ -45,3 +51,11 @@ class ModelTests(TestCase):
         """Test that creating a user with no password raises an exception"""
         with self.assertRaises(ValueError):
             get_user_model().objects.create_user('test@manny.dev', None)
+
+    def test_create_tag(self):
+        tag = models.Tag.objects.create(
+            submitted_by=create_user(),
+            name='Gin'
+        )
+
+        self.assertEqual(str(tag), tag.name)

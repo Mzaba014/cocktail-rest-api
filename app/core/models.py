@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.conf import settings
 
 
 class UserManager(BaseUserManager):
@@ -48,3 +49,15 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)  # allows access to admin panel
 
     objects = UserManager()
+
+
+class Tag(models.Model):
+    name = models.CharField(max_length=255)
+    # set the submitted_by to the user who submits the tag. Remove all tags submitted by user on delete
+    submitted_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
+
+    def __str__(self):
+        return self.name

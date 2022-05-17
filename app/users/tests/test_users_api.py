@@ -8,9 +8,9 @@ CREATE_USER_ENDPOINT = reverse('users:create')
 UPDATE_SELF_ENDPOINT = reverse('users:self')
 
 
-def create_user(**params):
+def create_user(email, password):
     """Helper function for creating Users"""
-    return get_user_model().objects.create_user(**params)
+    return get_user_model().objects.create_user(email, password)
 
 
 class PublicUsersAPITests(TestCase):
