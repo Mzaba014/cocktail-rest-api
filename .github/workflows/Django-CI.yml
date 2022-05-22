@@ -36,7 +36,7 @@ jobs:
     - name: Upload coverage report to Codecov
       uses: codecov/codecov-action@v3.1.0
       with:
-        files: app/coverage.xml
+        files: app/.coverage
         flags: unittests
         name: codecov-umbrella
       

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from core.models import Tag, Ingredient
+from core.models import Tag, Ingredient, Recipe
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -12,7 +12,7 @@ class TagSerializer(serializers.ModelSerializer):
 
 
 class IngredientSerializer(serializers.ModelSerializer):
-    """Serializer for Tag models"""
+    """Serializer for Ingredient models"""
 
     class Meta:
         model = Ingredient
