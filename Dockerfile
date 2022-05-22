@@ -18,6 +18,9 @@ RUN pip install -r /requirements.txt
 # uninstall temp-dependencies
 RUN apk del .temp-dependencies
 
+# copy pytest ini into container
+COPY pytest.ini /.
+
 # create /app folder on container
 RUN mkdir /app
 

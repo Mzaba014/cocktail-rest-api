@@ -33,10 +33,15 @@ jobs:
       run: |
         cd app
         python manage.py migrate
+    - name: Run tests
+      run: |
+        cd app
+        coverage run -m pytest --junitxml=app/test-reports/unittest/report.xml
+        coverage report --fail-under=95
     - name: Upload coverage report to Codecov
       uses: codecov/codecov-action@v3.1.0
       with:
-        files: app/.coverage
+        files: app/app/test-reports/unittest/report.xml
         flags: unittests
         name: codecov-umbrella
       
