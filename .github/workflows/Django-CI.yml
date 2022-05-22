@@ -44,4 +44,5 @@ jobs:
         files: app/app/test-reports/unittest/report.xml
         flags: unittests
         name: codecov-umbrella
+        token: ${{ secrets.CODECOV_TOKEN }}
       
