@@ -5,6 +5,7 @@ from recipes import views
 """Create DefaultRouter for the TagViewSet and route all requests to recipe API to that router"""
 router = DefaultRouter() # includes standard routes for CRUD operations
 router.register('tags', views.TagViewSet)
+router.register('ingredients', views.IngredientViewSet)
 app_name = 'recipes'
 
 urlpatterns = [

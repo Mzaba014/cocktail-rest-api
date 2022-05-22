@@ -59,3 +59,12 @@ class ModelTests(TestCase):
         )
 
         self.assertEqual(str(tag), tag.name)
+
+    def test_create_ingredient(self):
+        ingredient = models.Ingredient.objects.create(
+            submitted_by=create_user(),
+            name='Demerara syrup',
+            quantity='1oz'
+        )
+
+        self.assertEqual(str(ingredient), ingredient.name)
