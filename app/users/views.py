@@ -14,7 +14,7 @@ class CreateTokenView(ObtainAuthToken):
     renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES # allows interaction with the endpoint in browser
 
 class ManageUserView(generics.RetrieveUpdateAPIView):
-    """Allows self-management of the authenticated user"""
+    """Allows self-management by the authenticated user"""
     serializer_class = UserSerializer
     authentication_classes = (authentication.TokenAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)

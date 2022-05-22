@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'core',
     'users',
-    # 'recipes',
+    'recipes',
 ]
 
 MIDDLEWARE = [
@@ -142,8 +142,9 @@ AUTH_USER_MODEL = 'core.User'  # Sets our custom user model (core.User) as the d
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10,
+    # TODO: add pagination
+    #'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    #'PAGE_SIZE': 10,
 }
 
 SPECTACULAR_SETTINGS = {

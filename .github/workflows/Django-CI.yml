@@ -20,8 +20,8 @@ jobs:
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
-    - uses: actions/checkout@v2
     - name: Set up Python 3.9
+      uses: actions/checkout@v2
       uses: actions/setup-python@v2
       with:
         python-version: 3.9
@@ -33,7 +33,15 @@ jobs:
       run: |
         cd app
         python manage.py migrate
-    - name: Run tests
+    - name: Run tests and coverage report
       run: |
-        cd app
-        python manage.py test
+        coverage run manage.py test
+        coverage report --fail-under=95
+        coverage xml
+    - name: Upload coverage report to Codecov
+      uses: codecov/codecov-action@v3.1.0
+      with:
+        files: ./coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+      
